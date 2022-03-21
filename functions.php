@@ -68,12 +68,15 @@ function delete_data_beeply($id){
     }
 }
 function beeply_frontend(){
-
+global $wpdb;
+$fetchNotifications = $wpdb -> get_results("SELECT * FROM wp_beeply", OBJECT);
+foreach($fetchNotifications as $fetchNotification){
+}
     $pluginPath = plugin_dir_url( __FILE__ );
     ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $pluginPath. "style.css"; ?>">
 <script src="https://kit.fontawesome.com/114cf4f071.js" crossorigin="anonymous"></script>
-<div class="notification-bar"><center><a><i class="fa-solid fa-bell"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</a></center></div>
+<div class="notification-bar"><center><a><i class="fa-solid fa-bell"></i><?php echo $fetchNotification -> notification; ?></a></center></div>
 <?php
 }
 ?>
