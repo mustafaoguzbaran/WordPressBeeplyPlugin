@@ -1,2 +1,5 @@
-.notification-bar {width: 100%; background-color: black; color: white;  padding-bottom: 15px;}
-.notification-bar a {position: relative; top: 7px;}
+.notification-bar {color: white; position:sticky; bottom: 0; width:100%; color: white;  padding-bottom: 15px; background-color: black; z-index: 9999}
+.notification-bar a {position: relative; top: 7px; color: white;}
+.notification-bar a:link {color: white}
+a:link {color: white; text-decoration: none;}
+a {text-decoration: none;;}

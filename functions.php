@@ -9,11 +9,15 @@ function beeply_content(){?>
         <label>Link eklemek isterseniz, linkinizi buraya yapıştırın.
         <input type="text" name="notification_url" placeholder="https://url.com..."></input></label>
         <label><br>
+        <label> Duyuru barı HEX kodunu yazınız:
+            <input type="text" name="notification-bar-color" placeholder="#000000"></input>
+        </label><br>
             <input type="submit" value="Duyuru Yayımla!"></input>
         </label>
     </form>
 </div>
 <?php
+
 add_data_bepply();
 data_fetch_beeply();
 } 
@@ -53,6 +57,7 @@ foreach($wp_fetchData as $wp_fetchRow):
     <input type="submit" value="Duyuruyu Veritabanından Sil" name="delete"></input>
     </form>
     ';
+    echo $_POST['notification-bar-color'];
     delete_data_beeply($wp_fetchRow->id);
 endforeach;
 else:
@@ -70,13 +75,25 @@ function delete_data_beeply($id){
 function beeply_frontend(){
 global $wpdb;
 $fetchNotifications = $wpdb -> get_results("SELECT * FROM wp_beeply", OBJECT);
+if(count($fetchNotifications)){
 foreach($fetchNotifications as $fetchNotification){
+    
+    $fetchDataIndex = $fetchNotification;
+}
 }
     $pluginPath = plugin_dir_url( __FILE__ );
     ?>
+    <?php
+    if($fetchNotification == NULL){
+
+    }else{?>
 <link rel="stylesheet" type="text/css" href="<?php echo $pluginPath. "style.css"; ?>">
 <script src="https://kit.fontawesome.com/114cf4f071.js" crossorigin="anonymous"></script>
-<div class="notification-bar"><center><a><i class="fa-solid fa-bell"></i><?php echo $fetchNotification -> notification; ?></a></center></div>
+<div class="notification-bar"><center><a href ="<?php echo $fetchNotification -> notification_url;?>"><i class="fa-solid fa-bell" style="margin-right: 5px"></i><?php echo($fetchDataIndex->notification) ?></a></center></div>
+<?php   
+    } 
+    ?>
+
 <?php
 }
 ?>

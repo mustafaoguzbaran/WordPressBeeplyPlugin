@@ -9,7 +9,7 @@ Author URI: https://mustafaoguzbaran.com
 */
 include("functions.php");
 add_action( "admin_menu", "beeply_front");
-add_action("wp_head", "beeply_frontend");
+add_action("wp_footer", "beeply_frontend");
 function beeply_front(){
     add_menu_page("Beeply", "Beeply", "manage_options","beeply", "beeply_content");
 }
