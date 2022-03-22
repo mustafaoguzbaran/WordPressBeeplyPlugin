@@ -1,4 +1,5 @@
 <?php
+ $tableName = $wpdb -> prefix."beeply";
 const ABSPATH = "";
 //Bu fonksiyon admin panelin önyüzünü görüntüler.
 function beeply_content(){?>
@@ -39,7 +40,8 @@ function add_table_beeply(){
 // Bu fonksiyon veritabanına veri eklemeyi sağlar.
 function add_data_bepply(){
     global $wpdb;
-    $wpdb -> insert("wp_beeply", array(
+    global $tableName;
+    $wpdb -> insert("$tableName", array(
         "notification" => $_POST["notification"],
         "notification_url" => $_POST["notification_url"]
     ));
@@ -47,7 +49,8 @@ function add_data_bepply(){
 //Bu fonksiyon veri tabanındaki verileri çekmemize olanak tanır.
 function data_fetch_beeply(){
     global $wpdb;
-    $wp_fetchData = $wpdb -> get_results("SELECT * FROM wp_beeply", OBJECT);
+    global $tableName;
+    $wp_fetchData = $wpdb -> get_results("SELECT * FROM $tableName", OBJECT);
     if(count($wp_fetchData)):
 foreach($wp_fetchData as $wp_fetchRow):
     echo "<br>";
@@ -67,14 +70,16 @@ else:
 //Bu fonksiyon veritabanındaki verileri silmemize olanak tanır.
 function delete_data_beeply($id){
     global $wpdb;
+    global $tableName;
     if ($_POST["delete"]){
-        $wpdb -> query($wpdb ->prepare("DELETE FROM wp_beeply WHERE id = $id"));
+        $wpdb -> query($wpdb ->prepare("DELETE FROM $tableName WHERE id = $id"));
         echo '<meta http-equiv="refresh" content="0.000001;URL=admin.php?page=beeply">';
     }
 }
 function beeply_frontend(){
 global $wpdb;
-$fetchNotifications = $wpdb -> get_results("SELECT * FROM wp_beeply", OBJECT);
+global $tableName;
+$fetchNotifications = $wpdb -> get_results("SELECT * FROM $tableName", OBJECT);
 if(count($fetchNotifications)){
 foreach($fetchNotifications as $fetchNotification){
     
